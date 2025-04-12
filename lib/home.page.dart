@@ -12,17 +12,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  var txtReais = TextEditingController();
-  var txtResultado = TextEditingController();
-
-  void exchangeCurrency() async {
-    double result = await widget.viewModel.exchangeCurrency(
-      double.parse(txtReais.text),
-    );
-
-    txtResultado.text = result.toString();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +22,7 @@ class _HomeViewState extends State<HomeView> {
           spacing: 10,
           children: [
             TextField(
-              controller: txtReais,
+              controller: widget.viewModel.realController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: "Reais",
@@ -50,11 +39,11 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
             ElevatedButton(
-              onPressed: exchangeCurrency,
+              onPressed: widget.viewModel.exchangeCurrency,
               child: Text("Converter"),
             ),
             TextField(
-              controller: txtResultado,
+              controller: widget.viewModel.resultController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: "Resultado",
